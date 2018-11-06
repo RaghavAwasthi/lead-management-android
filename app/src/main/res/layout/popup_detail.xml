@@ -34,7 +34,12 @@
             android:id="@+id/details_image"
             android:maxHeight="100dp"
             android:src="@drawable/ic_person_grey" />
+
         <ScrollView
+
+
+        <androidx.cardview.widget.CardView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.v7.widget.CardView
@@ -313,6 +318,10 @@
 
 
                     </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>

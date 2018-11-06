@@ -20,6 +20,10 @@
     <string name="name">Name</string>
     <string name="phone">Phone</string>
 
+    <string name="Sign_In_Cancelled">Sign in Cancelled</string>
+    <string name="Sign_In_Completed">Sign in Successfull</string>
+    <string name="No_Network">Please Check your Network Settings </string>
+
 
     <string name="title_add_contact">Add Contact</string>
     <string name="title_edit_contact">Edit Contact</string>

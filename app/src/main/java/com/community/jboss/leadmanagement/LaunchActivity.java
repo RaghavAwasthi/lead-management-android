@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.community.jboss.leadmanagement.main.MainActivity;
 
 public class LaunchActivity extends AppCompatActivity {
+
     boolean wasRunBefore;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

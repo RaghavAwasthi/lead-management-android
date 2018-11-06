@@ -22,7 +22,7 @@ This app is currently in development, which means that in the future, many more 
 * On clicking the notification, if the caller's details exist on the server, show it to the user, else ask the user to enter their details.
 
 ## Flow Diagram for the app
-![](https://raw.githubusercontent.com/JBossOutreach/lead-management-android/master/art.jpg)
+![](https://raw.githubusercontent.com/JBossOutreach/lead-management-android/master/dataflowdiagram.jpg)
 
 ## Setting up project
 
