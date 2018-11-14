@@ -66,6 +66,7 @@ public class CallReceiver extends BroadcastReceiver {
         // Call Recording Service Intent
         Intent notifyIntent = new Intent("com.aykuttasil.callrecord.CallRecord");
         notifyIntent.setClass(mContext, CallRecorderService.class);
+        notifyIntent.putExtra("number",number);
 
         PendingIntent notifyPendingIntent = PendingIntent.getService(
                 mContext, 0, notifyIntent, 0
@@ -82,18 +83,7 @@ public class CallReceiver extends BroadcastReceiver {
                                 notifyPendingIntent);
 
 
-        // Contact Details Intent
-        Intent contentIntent = new Intent(mContext, EditContactActivity.class);
-        PendingIntent contentPendingIntent = PendingIntent.getActivity(mContext, 0, contentIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
 
-        final NotificationCompat.Builder notification = new NotificationCompat.Builder(mContext)
-                .setSmallIcon(R.drawable.ic_phone)
-                .setContentTitle("Call in Progress")
-                .setTicker("Lead Management")
-                .setContentIntent(contentPendingIntent)
-                .setContentText("Number: " + number)
-                .setChannelId(CHANNEL_ID);
 
         NotificationManager mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -110,4 +100,5 @@ public class CallReceiver extends BroadcastReceiver {
 
         }
     }
+
 }
