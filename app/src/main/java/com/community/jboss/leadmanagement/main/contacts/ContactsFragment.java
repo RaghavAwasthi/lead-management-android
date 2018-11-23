@@ -1,11 +1,9 @@
 package com.community.jboss.leadmanagement.main.contacts;
 
-import android.animation.LayoutTransition;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -83,11 +81,11 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
         searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                if(item==searchMenuItem){
+                if (item == searchMenuItem) {
                     mAdapter.getFilter().filter(searchView.getQuery());
-                    if( mAdapter.getDataSize() == 0){
+                    if (mAdapter.getDataSize() == 0) {
                         textView.setVisibility(View.VISIBLE);
-                    } else{
+                    } else {
                         textView.setVisibility(View.GONE);
                     }
                 }
@@ -96,7 +94,7 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                if(item==searchMenuItem){
+                if (item == searchMenuItem) {
                     mAdapter.getFilter().filter("");
                     textView.setVisibility(View.GONE);
                 }
@@ -137,10 +135,9 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
     @Override
     public boolean onQueryTextChange(String newText) {
         mAdapter.getFilter().filter(newText);
-        if (mAdapter.getDataSize() == 0){
+        if (mAdapter.getDataSize() == 0) {
             textView.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             textView.setVisibility(View.GONE);
         }
         return true;

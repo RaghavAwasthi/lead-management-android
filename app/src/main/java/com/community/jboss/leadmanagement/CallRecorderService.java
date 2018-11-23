@@ -23,7 +23,6 @@ public class CallRecorderService extends Service {
     AudioManager audioManager;
 
 
-
     @Nullable
     @Override
     public Binder onBind(Intent intent) {
@@ -32,8 +31,8 @@ public class CallRecorderService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        audioManager = (AudioManager)getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        if(audioManager != null) {
+        audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        if (audioManager != null) {
             audioManager.setMode(AudioManager.MODE_IN_CALL);
             audioManager.setSpeakerphoneOn(true);
         }
@@ -68,7 +67,7 @@ public class CallRecorderService extends Service {
 
                 recorder = null;
             }
-        }catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
     }

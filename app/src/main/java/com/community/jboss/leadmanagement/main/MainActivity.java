@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    private static final String TAG = "GoogleActivity";
+    private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -283,6 +283,8 @@ public class MainActivity extends BaseActivity
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
+                Toast.makeText(getApplicationContext(), "Google Sign in failed - "+e.getLocalizedMessage(), Toast.LENGTH_SHORT ).show();
+
                 // [START_EXCLUDE]
                 updateUI(null);
                 // [END_EXCLUDE]

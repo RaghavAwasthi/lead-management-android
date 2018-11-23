@@ -59,7 +59,7 @@ public class EditContactActivityViewModel extends AndroidViewModel {
         return mContactNumbers;
     }
 
-    public ContactNumber getContactNumberByNumber(String number){
+    public ContactNumber getContactNumberByNumber(String number) {
         final ContactNumberDao contactNumberDao = DbUtil.contactNumberDao(getApplication());
         return contactNumberDao.getContactNumber(number);
     }
@@ -104,7 +104,7 @@ public class EditContactActivityViewModel extends AndroidViewModel {
     public void saveData(String email, String location, String query, byte[] image, String notes) {
         final ContactDao dao = DbUtil.contactDao(getApplication());
         Contact contact = mContact.getValue();
-        if(contact!=null){
+        if (contact != null) {
             contact.setMail(email);
             contact.setLocation(location);
             contact.setQuery(query);

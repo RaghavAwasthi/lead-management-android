@@ -14,14 +14,13 @@ import android.widget.TextView;
 
 import com.community.jboss.leadmanagement.data.entities.Contact;
 import com.community.jboss.leadmanagement.main.contacts.ContactsAdapter;
-import com.community.jboss.leadmanagement.utils.DbUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class CustomDialogBox{
+public class CustomDialogBox {
 
     @BindView(R.id.dialog_yes)
     Button yes;
@@ -37,17 +36,17 @@ public class CustomDialogBox{
     private ContactsAdapter adapter;
     private Dialog dialog;
 
-    public void showAlert(Activity activity, final Contact contact, ContactsAdapter adapter){
+    public void showAlert(Activity activity, final Contact contact, ContactsAdapter adapter) {
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View view = LayoutInflater.from(dialog.getContext()).inflate(R.layout.custom_dialog_box,null,false);
-        ButterKnife.bind(this,view);
+        View view = LayoutInflater.from(dialog.getContext()).inflate(R.layout.custom_dialog_box, null, false);
+        ButterKnife.bind(this, view);
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(dialog.getContext());
         this.contact = contact;
         this.adapter = adapter;
         this.dialog = dialog;
 
-        if(mPref.getBoolean(SettingsActivity.PREF_DARK_THEME,false)){
+        if (mPref.getBoolean(SettingsActivity.PREF_DARK_THEME, false)) {
             layout.setBackgroundColor(Color.parseColor("#303030"));
             text.setTextColor(Color.WHITE);
             text.setBackgroundColor(Color.parseColor("#303030"));
@@ -63,13 +62,13 @@ public class CustomDialogBox{
     }
 
     @OnClick(R.id.dialog_yes)
-    void onYesClicked(){
+    void onYesClicked() {
         adapter.mListener.onContactDeleted(contact);
         dialog.dismiss();
     }
 
     @OnClick(R.id.dialog_no)
-    void onNoClicked(){
+    void onNoClicked() {
         dialog.dismiss();
     }
 

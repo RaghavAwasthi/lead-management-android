@@ -17,6 +17,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,7 +70,7 @@ public class EditContactActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
-        if(useDarkTheme) {
+        if (useDarkTheme) {
             setTheme(R.style.AppTheme_BG);
         }
 
@@ -78,9 +79,9 @@ public class EditContactActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        locationField.setHint(Html.fromHtml(getString(R.string.location)+" <small>(optional)</small>", Html.FROM_HTML_MODE_LEGACY));
+        locationField.setHint(Html.fromHtml(getString(R.string.location) + " <small>(optional)</small>", Html.FROM_HTML_MODE_LEGACY));
 
-        if(useDarkTheme) {
+        if (useDarkTheme) {
             setDrawableLeft(locationField, R.drawable.ic_location_white);
             setDrawableLeft(emailField, R.drawable.ic_email_white);
             setDrawableLeft(contactNameField, R.drawable.ic_person_white);
@@ -99,11 +100,11 @@ public class EditContactActivity extends AppCompatActivity {
                 contactNameField.setText(contact.getName());
                 emailField.setText(contact.getMail());
                 notesField.setText(contact.getNotes());
-                if(contact.getLocation() != null){
+                if (contact.getLocation() != null) {
                     locationField.setText(contact.getLocation());
                 }
                 queryField.setText(contact.getQuery());
-                if(contact.getImage()  != null){
+                if (contact.getImage() != null) {
                     Glide.with(this).load(bytesToBitmap(contact.getImage())).apply(new RequestOptions().circleCrop()).into(contact_logo);
                 }
             }
@@ -119,9 +120,9 @@ public class EditContactActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         final String number = intent.getStringExtra(INTENT_EXTRA_CONTACT_NUM);
-        if(mViewModel.getContactNumberByNumber(number)!=null){
+        if (mViewModel.getContactNumberByNumber(number) != null) {
             mViewModel.setContact(mViewModel.getContactNumberByNumber(number).getContactId());
-        }else{
+        } else {
             mViewModel.setContact(null);
             contactNumberField.setText(number);
         }
@@ -170,7 +171,6 @@ public class EditContactActivity extends AppCompatActivity {
     }
 
 
-
     //TODO Add multiple numbers
     private void saveContact() {
         // Check is Name or Password is empty
@@ -200,8 +200,8 @@ public class EditContactActivity extends AppCompatActivity {
         return stream.toByteArray();
     }
 
-    public static Bitmap bytesToBitmap(byte[] bytes){
-        return BitmapFactory.decodeByteArray(bytes , 0, bytes.length);
+    public static Bitmap bytesToBitmap(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
     private boolean checkEditText(EditText editText, String errorStr) {
@@ -212,6 +212,7 @@ public class EditContactActivity extends AppCompatActivity {
 
         return true;
     }
+
     private boolean checkNo(EditText editText, String errorStr) {
         if (editText.getText().toString().length() < 4) {
             editText.setError(errorStr);
@@ -220,30 +221,38 @@ public class EditContactActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean checkInputs(){
+    private boolean checkInputs() {
         boolean status = true;
 
-        if(checkEditText(emailField, "Please enter mail")){
-            if(!emailField.getText().toString().contains("@")){
+        if (checkEditText(emailField, "Please enter mail")) {
+            if (!emailField.getText().toString().contains("@")) {
                 emailField.setError("Wrong mail formatting");
                 status = false;
             }
         }
 
-        if(!checkEditText(contactNumberField, "Please enter mobile number")){
+        if (!checkEditText(contactNumberField, "Please enter mobile number")) {
             status = false;
         }
-        if(!checkEditText(contactNameField, "Please enter full name")){
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailField.getText().toString()).matches()) {
+            emailField.setError("Invalid Email Addresss");
             status = false;
         }
-        if(!checkEditText(queryField, "Please enter query")){
+        if (!Patterns.PHONE.matcher(contactNumberField.getText().toString()).matches()) {
+            contactNumberField.setError("Invalid Mobile Number");
+            status = false; //Check to make sure the number provided is valid
+        }
+        if (!checkEditText(contactNameField, "Please enter full name")) {
+            status = false;
+        }
+        if (!checkEditText(queryField, "Please enter query")) {
             status = false;
         }
 
         return status;
     }
 
-    private void setDrawableLeft(TextInputEditText field, int id){
+    private void setDrawableLeft(TextInputEditText field, int id) {
         Drawable drawable = getResources().getDrawable(id);
         drawable.setBounds(0, 0, 60, 60);
         field.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
@@ -253,7 +262,7 @@ public class EditContactActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==IMAGE_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == IMAGE_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {

@@ -1,17 +1,11 @@
 package com.community.jboss.leadmanagement;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-
-import com.community.jboss.leadmanagement.main.MainActivity;
-import com.community.jboss.leadmanagement.main.contacts.editcontact.EditContactActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +21,7 @@ public class SettingsActivity extends FragmentActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
-        if(useDarkTheme) {
+        if (useDarkTheme) {
             setTheme(R.style.AppTheme_Dark);
         }
 

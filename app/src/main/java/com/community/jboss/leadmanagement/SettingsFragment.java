@@ -26,12 +26,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
 
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.settings_preferences);
 
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             Activity mActivity = getActivity();
             final SharedPreferences sharedPref = mActivity.getPreferences(Context.MODE_PRIVATE);
             final String currentServer = sharedPref.getString(getString(R.string.saved_server_ip), "https://github.com/jboss-outreach");

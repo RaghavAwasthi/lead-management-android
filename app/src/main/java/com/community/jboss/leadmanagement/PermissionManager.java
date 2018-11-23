@@ -13,40 +13,41 @@ import java.util.List;
 import java.util.Random;
 
 
-public class PermissionManager implements ActivityCompat.OnRequestPermissionsResultCallback{
+public class PermissionManager implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private Context context;
     private Activity activity;
 
-    public PermissionManager(Context context,Activity activity){
+    public PermissionManager(Context context, Activity activity) {
 
         this.context = context;
         this.activity = activity;
     }
-    public boolean permissionStatus(String permission){
+
+    public boolean permissionStatus(String permission) {
         return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void requestPermission(int constantInt,String permission){
+    public void requestPermission(int constantInt, String permission) {
         ActivityCompat.requestPermissions(activity,
                 new String[]{permission},
                 constantInt);
     }
 
-    public int checkAndAskPermissions(String... permissions){
+    public int checkAndAskPermissions(String... permissions) {
 
         // Bound: 32767 - Maximum signed 16 bit integer
         int requestId = new Random().nextInt(32767);
 
         List<String> nonGrantedPermission = new ArrayList<>();
 
-        for(String permission: permissions){
-            if(ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED){
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
                 nonGrantedPermission.add(permission);
             }
         }
 
-        if(!nonGrantedPermission.isEmpty()){
+        if (!nonGrantedPermission.isEmpty()) {
             ActivityCompat.requestPermissions(activity, nonGrantedPermission.toArray(new String[nonGrantedPermission.size()]), requestId);
         }
         return requestId;
@@ -54,13 +55,13 @@ public class PermissionManager implements ActivityCompat.OnRequestPermissionsRes
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch(requestCode){
+        switch (requestCode) {
             case 512:
-                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(context, "Permission Granted!", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(context, "No Permission Granted!", Toast.LENGTH_SHORT).show();
                 }
                 break;

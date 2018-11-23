@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
-import com.community.jboss.leadmanagement.main.MainActivity;
 import com.community.jboss.leadmanagement.main.contacts.editcontact.EditContactActivity;
 
 public class CallReceiver extends BroadcastReceiver {
@@ -29,13 +28,13 @@ public class CallReceiver extends BroadcastReceiver {
 
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
 
-        if(tm == null) return;
+        if (tm == null) return;
 
-        tm.listen(new PhoneStateListener(){
+        tm.listen(new PhoneStateListener() {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 super.onCallStateChanged(state, incomingNumber);
-                switch(state){
+                switch (state) {
                     case TelephonyManager.CALL_STATE_IDLE:
                         hideNotification();
                         break;
@@ -43,9 +42,9 @@ public class CallReceiver extends BroadcastReceiver {
                         showNotification(incomingNumber);
                         break;
                 }
-                System.out.println("incomingNumber : "+incomingNumber);
+                System.out.println("incomingNumber : " + incomingNumber);
             }
-        },PhoneStateListener.LISTEN_CALL_STATE);
+        }, PhoneStateListener.LISTEN_CALL_STATE);
 
     }
 
