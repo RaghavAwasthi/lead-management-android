@@ -1,6 +1,7 @@
 package com.community.jboss.leadmanagement.main.contacts;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -75,17 +77,28 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
         searchView.setQueryHint(getString(R.string.search));
         searchView.onActionViewExpanded();
         searchView.clearFocus();
+        searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                }
+            }
+        });
         searchView.setSubmitButtonEnabled(false);
         searchView.setQueryRefinementEnabled(false);
         searchView.setOnQueryTextListener(this);
         searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                if(item==searchMenuItem){
+                if (item == searchMenuItem) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                     mAdapter.getFilter().filter(searchView.getQuery());
-                    if( mAdapter.getDataSize() == 0){
+                    if (mAdapter.getDataSize() == 0) {
                         textView.setVisibility(View.VISIBLE);
-                    } else{
+                    } else {
                         textView.setVisibility(View.GONE);
                     }
                 }
@@ -94,7 +107,9 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                if(item==searchMenuItem){
+                if (item == searchMenuItem) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                     mAdapter.getFilter().filter("");
                     textView.setVisibility(View.GONE);
                 }
@@ -135,10 +150,9 @@ public class ContactsFragment extends MainFragment implements ContactsAdapter.Ad
     @Override
     public boolean onQueryTextChange(String newText) {
         mAdapter.getFilter().filter(newText);
-        if (mAdapter.getDataSize() == 0){
+        if (mAdapter.getDataSize() == 0) {
             textView.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             textView.setVisibility(View.GONE);
         }
         return true;
