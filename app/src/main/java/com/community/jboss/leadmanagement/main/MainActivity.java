@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
+import shortbread.Shortbread;
 import timber.log.Timber;
 
 import static com.community.jboss.leadmanagement.SettingsFragment.PREF_DARK_THEME;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Shortbread.create(this);
         Fabric.with(this, new Crashlytics());
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);

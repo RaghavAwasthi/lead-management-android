@@ -39,10 +39,11 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import shortbread.Shortcut;
 
 import static com.community.jboss.leadmanagement.SettingsFragment.PREF_DARK_THEME;
 
-
+@Shortcut(id = "addcontact", icon = R.drawable.ic_add_material, shortLabel = "Add Contact")
 public class EditContactActivity extends AppCompatActivity {
     public static final String INTENT_EXTRA_CONTACT_NUM = "INTENT_EXTRA_CONTACT_NUM";
 
