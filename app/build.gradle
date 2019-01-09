@@ -53,7 +53,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // ButterKnife
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc3'
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     // Icepick
