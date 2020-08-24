@@ -42,7 +42,7 @@ dependencies {
     implementation "com.android.support:preference-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:preference-v14:${rootProject.ext.supportLibVersion}"
     // Constraint layout
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0'
     //Cardview
     implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
     // Test
